@@ -1,4 +1,4 @@
-package week_1.ruby;
+package week_1.ruby.maxProductOfThree;
 
 import java.util.*;
 
