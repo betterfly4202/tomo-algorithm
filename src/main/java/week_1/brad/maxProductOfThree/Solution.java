@@ -2,7 +2,6 @@ package week_1.brad.maxProductOfThree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,11 +10,22 @@ import java.util.List;
  */
 public class Solution {
 
-    static int maxResult(int [] arr){
-        isInvalidateRange(arr);
-        Arrays.sort(arr);
+    private final static List<Integer> list = new ArrayList<>();
+    private static int minusCount = 0;
 
-        return arr[arr.length- 1] * arr[arr.length- 2] * arr[arr.length- 3];
+    static int maxResult(int [] arr){
+        Arrays.sort(arr);
+        isInvalidateRange(arr);
+
+        int result = arr[arr.length- 1] * arr[arr.length- 2] * arr[arr.length- 3];
+        if(minusCount%2 == 0){
+            int minus = arr[0] * arr[1] * arr[arr.length-1];
+            if(minus - result >0){
+                result = minus;
+            }
+        }
+
+        return result;
     }
 
     private static void isInvalidateRange(int [] arr){
@@ -26,6 +36,10 @@ public class Solution {
         for(int v : arr){
             if(v < -1_000 || v > 1_000){
                 throw new IllegalArgumentException("Each element of array Value is an integer within the range [−1,000..1,000].");
+            }
+
+            if(v < 0){
+                minusCount++;
             }
         }
     }
