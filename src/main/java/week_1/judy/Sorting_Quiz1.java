@@ -59,8 +59,10 @@ public class Sorting_Quiz1 {
     	int none_num = 1;
     	int max=-1000000000,compare=-1000000000, pos_cnt=0,neg_cnt=0;
     	int[] positive_max_num = new int[] {none_num,none_num,none_num};
-	int[] negative_max_num = new int[] {none_num,none_num,none_num,none_num,none_num,none_num};
-	boolean hasZero = false;
+    	int[] negative_min_num = new int[] {none_num,none_num,none_num};
+    	int[] negative_max_num = new int[] {none_num,none_num,none_num};
+    	
+    	boolean hasZero = false;
 		
     	for( int i=0; i<A.length; i++ ) {
     		int num = A[i];
@@ -81,55 +83,54 @@ public class Sorting_Quiz1 {
     			}
     		}else {
     			//음수 처리
-				neg_cnt++;
-    			int neg_half_length = negative_max_num.length/2;
+			neg_cnt++;
     			
     			//음수 최솟값
-    			for( int j=0; j<neg_half_length; j++ ) {
-    				if( negative_max_num[j] == none_num ) {
-    					negative_max_num[j] = num;
+    			for( int j=0; j<negative_min_num.length; j++ ) {
+    				if( negative_min_num[j] == none_num ) {
+    					negative_min_num[j] = num;
     					break;
     				}
-				if( num < negative_max_num[j] ) {
-    					for( int k=neg_half_length-1; k>j; k--) {
-    						negative_max_num[k] = negative_max_num[k-1];
-    					}
-    					negative_max_num[j] = num;
-    					break;
-				}
+    				if( num < negative_min_num[j] ) {
+        				for( int k=negative_min_num.length-1; k>j; k--) {
+        					negative_min_num[k] = negative_min_num[k-1];
+        				}
+        				negative_min_num[j] = num;
+        				break;
+    				}
     			}
     			
     			//음수 최댓값
-    			for( int j=neg_half_length; j<negative_max_num.length; j++ ) {
+    			for( int j=0; j<negative_max_num.length; j++ ) {
     				if( negative_max_num[j] == none_num ) {
     					negative_max_num[j] = num;
     					break;
     				}
-				if( num > negative_max_num[j] ) {
-    					for( int k=negative_max_num.length-1; k>j; k--) {
-    						negative_max_num[k] = negative_max_num[k-1];
-    					}
-    					negative_max_num[j] = num;
-    					break;
-				}
+    				if( num > negative_max_num[j] ) {
+					for( int k=negative_max_num.length-1; k>j; k--) {
+        					negative_max_num[k] = negative_max_num[k-1];
+        				}
+        				negative_max_num[j] = num;
+        				break;
+    				}
     			}
     		}
     	}
     	
-    	if( pos_cnt >= 3 ) //양수만 있는 경우
+    	if( pos_cnt >= 3 ) //양수가 3개이상 있는 경우
     		compare = positive_max_num[0]*positive_max_num[1]*positive_max_num[2];
 
     	if( max < compare )
     		max = compare;
     	
     	if( pos_cnt >= 1 && neg_cnt >= 2 ) //양수+음수 있는 경우
-    		compare = positive_max_num[0]*negative_max_num[0]*negative_max_num[1];
+    		compare = positive_max_num[0]*negative_min_num[0]*negative_min_num[1];
 
     	if( max < compare )
     		max = compare;
     	
     	if( pos_cnt == 0 ) //음수만 있는 경우
-    		compare = negative_max_num[3]*negative_max_num[4]*negative_max_num[5];
+    		compare = negative_max_num[0]*negative_max_num[1]*negative_max_num[2];
 
     	if( max < compare )
     		max = compare;
