@@ -18,6 +18,11 @@ public class SolutionTest {
     int [] sample5 = new int[]{-5, 5, -5, 4};
     int [] sample6 = new int[]{-2, -10, -3, 5, 41, 10, 3, -8}; // 410 / 205 * 3
 
+    int [] sample7 = new int[]{-1, -5, -6, -4, -7, -10}; // 410 / 205 * 3
+    int [] sample8 = new int[]{1, -5, -6, -4, -7, -10}; // 410 / 205 * 3
+
+
+
     // 615,  20 41 820
 
     @Test
@@ -28,5 +33,7 @@ public class SolutionTest {
         assertThat(maxResult(sample4), is(0));
         assertThat(maxResult(sample5), is(125));
         assertThat(maxResult(sample6), is(80*41));
+        assertThat(maxResult(sample7), is(-20));
+        assertThat(maxResult(sample8), is(70));
     }
 }
