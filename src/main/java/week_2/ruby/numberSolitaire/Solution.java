@@ -1,7 +1,5 @@
 package week_2.ruby.numberSolitaire;
 
-import java.util.Arrays;
-
 /**
  * https://app.codility.com/programmers/lessons/17-dynamic_programming/number_solitaire/
  * 
@@ -54,7 +52,7 @@ N은 범위[2] 내의 정수이다.100,000];
 배열 A의 각 요소는 범위[10,000] 내의 정수임10,000].
  * */
 public class Solution {
-	private int start = 0;
+	private int start = 1;
     int result = 0;
     
 	public int solution(int[] A) {
@@ -65,24 +63,23 @@ public class Solution {
         	
         } while(this.start < A.length);
         
-		return result;
+		return this.result;
     }
 	
 	public void addMaxNum(int[] A) {
-		int max = A[this.start + 1];
+		int max = A[this.start - 1];
 		int dice = 1;
-		int length = ( ( A.length -1 - this.start ) >= 6 ) ? 6 : ( A.length - 1 - this.start );
-		//System.out.println("length -> " + length);
-		System.out.println("length2 -> " + ( A.length -1 - this.start));
+		int length = ( ( A.length - this.start ) >= 6 ) ? 6 : ( A.length - this.start );
+		//System.out.println("for length -> " + length);
 		for (int i=1; i<= length; i++) {
-			if( max < A[this.start + i] ) {
-				max = A[this.start + i];
+			if( max < A[this.start + i - 1] ) {
+				max = A[this.start + i - 1];
 				dice = i;
 			}
 		}
 		
 		this.result += max;
-		this.start = this.start + dice;
+		this.start = this.start + dice + 1;
 		System.out.println("result -> " + this.result);
 		System.out.println("start -> " + this.start);
 	}
