@@ -75,11 +75,10 @@ public class Solution {
         	i = dice;
         	//System.out.println("position -> " + i + ", result -> " + result);
         	
-
+        	if( !isMax ) {
+        		result += A[dice - 1];
+        	}
         }
-        
-        if( !isMax )
-    		result += A[A.length - 1];
         
 		return result;
     }
