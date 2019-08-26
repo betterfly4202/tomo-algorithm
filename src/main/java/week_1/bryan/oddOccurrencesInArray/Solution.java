@@ -1,3 +1,5 @@
+package week_1.bryan.oddOccurrencesInArray;
+
 import java.util.Arrays;
 
 public class Solution {
