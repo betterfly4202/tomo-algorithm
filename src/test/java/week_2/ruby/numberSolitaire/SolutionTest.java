@@ -9,6 +9,6 @@ public class SolutionTest {
 
 	@Test
 	public void 테스트() {
-		assertEquals(solution.solution(new int[] {1,-2,0,9,-1,-2}), 9);
+		assertEquals(solution.solution(new int[] {1,-2,0,9,-1,-2}), 8);
 	}
 }
