@@ -1,6 +1,8 @@
 
 package week_2.ruby.numberSolitaire;
 
+import java.util.Arrays;
+
 /**
  * https://app.codility.com/programmers/lessons/17-dynamic_programming/number_solitaire/
  * 
@@ -54,32 +56,46 @@ N은 범위[2] 내의 정수이다.100,000];
  * */
 public class Solution {
 	public int solution(int[] A) {
-        int result = A[0];
         int length = A.length;
-        boolean isMax = false;
-        for(int i=0; i<length; i++) {
-        	
-        	int dice = 1;
-        	isMax = false;
+        int[] sum = new int[7];
+        
+        
+        for( int i=0; i<length; i++) {
+        	int pos = 0;
+        	int maxPos = -1;
+        	sum[0] = A[i];
+        	if( pos >= length - 1 ) break;
         	
         	for(int k=1; k<=6; k++) {
-        		dice = i + k;
-        		//System.out.println("i -> " + i + ", k -> " + k);
-        		if( dice >= length ) break;
-        		if( A[i] < ( A[i] + A[dice] ) ) {
-        			isMax = true;
-        			result += A[dice];
+        		
+        		
+        		
+        		pos = i + k;
+        		
+        		System.out.println("2. i -> " + i + ", k -> " + k + ", pos -> " + pos);
+        		
+        		if( pos >= length - 1 ) {
+        			pos--;
         			break;
         		}
+        		
+        		sum[k] = sum[0] + A[pos];
+        		
+        		
+        		if( sum[0] < ( A[i] + A[pos] ) ) {
+        			maxPos = pos;
+        			sum[k] = A[pos];
+        			System.out.println("maxPos => " + maxPos + ", value => " + sum[k]);
+        		}
         	}
-        	i = dice;
-        	//System.out.println("position -> " + i + ", result -> " + result);
+
+        	i = ( maxPos > 0 )? maxPos : pos;
+
+        	A[i] = sum[0] + A[pos];
         	
-        	if( !isMax ) {
-        		result += A[dice - 1];
-        	}
+        	Arrays.fill(sum, 0);
         }
         
-		return result;
+		return A[length - 1];
     }
 }
