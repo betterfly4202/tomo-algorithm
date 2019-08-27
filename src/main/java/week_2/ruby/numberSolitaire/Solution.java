@@ -56,46 +56,35 @@ N은 범위[2] 내의 정수이다.100,000];
  * */
 public class Solution {
 	public int solution(int[] A) {
-        int length = A.length;
+		int length = A.length;
         int[] sum = new int[7];
         
-        
+        int pos = 0;
+        int maxSum = -999999999;
         for( int i=0; i<length; i++) {
-        	int pos = 0;
-        	int maxPos = -1;
-        	sum[0] = A[i];
-        	if( pos >= length - 1 ) break;
-        	
-        	for(int k=1; k<=6; k++) {
-        		
-        		
+        	pos = 0;
+        	//sum[0] = A[i];
+        	System.out.println("A[i]=>" + A[i]);
+        	//maxSum = A[i] + A[i+1];
+        	for(int k=2; k<=6; k++) {
         		
         		pos = i + k;
         		
         		System.out.println("2. i -> " + i + ", k -> " + k + ", pos -> " + pos);
         		
-        		if( pos >= length - 1 ) {
-        			pos--;
-        			break;
-        		}
+        		if( pos >= length ) break;
+   
+        		int tmpSum = A[pos] + A[i];
         		
-        		sum[k] = sum[0] + A[pos];
-        		
-        		
-        		if( sum[0] < ( A[i] + A[pos] ) ) {
-        			maxPos = pos;
-        			sum[k] = A[pos];
-        			System.out.println("maxPos => " + maxPos + ", value => " + sum[k]);
-        		}
+        		maxSum = Math.max(maxSum, tmpSum);
+        		System.out.println("maxSum ======================> " + maxSum );
         	}
-
-        	i = ( maxPos > 0 )? maxPos : pos;
-
-        	A[i] = sum[0] + A[pos];
-        	
-        	Arrays.fill(sum, 0);
+        	System.out.println(Arrays.toString(A));
+        	System.out.println("i => " + i + ", masSum -> " + maxSum);
+        	A[i] = maxSum;
+        	System.out.println(Arrays.toString(A));
         }
         
 		return A[length - 1];
-    }
+	}
 }
