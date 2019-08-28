@@ -57,34 +57,24 @@ N은 범위[2] 내의 정수이다.100,000];
 public class Solution {
 	public int solution(int[] A) {
 		int length = A.length;
-        int[] sum = new int[7];
+        int[] sum = new int[A.length];
         
-        int pos = 0;
-        int maxSum = -999999999;
-        for( int i=0; i<length; i++) {
-        	pos = 0;
-        	//sum[0] = A[i];
-        	System.out.println("A[i]=>" + A[i]);
-        	//maxSum = A[i] + A[i+1];
-        	for(int k=2; k<=6; k++) {
-        		
-        		pos = i + k;
-        		
-        		System.out.println("2. i -> " + i + ", k -> " + k + ", pos -> " + pos);
-        		
+        Arrays.fill(sum, Integer.MIN_VALUE);
+        sum[0] = A[0];
+        for( int i=0; i<length; i++) {  
+        	System.out.println("[before] sum -> " + Arrays.toString(sum));
+        	for(int k=1; k<=6; k++) {
+        		int pos = i + k;
         		if( pos >= length ) break;
-   
-        		int tmpSum = A[pos] + A[i];
         		
-        		maxSum = Math.max(maxSum, tmpSum);
-        		System.out.println("maxSum ======================> " + maxSum );
+    			int tmpSum = sum[i] + A[pos];	//현재 숫자 + 주사위 굴린 숫자
+    			sum[pos] = Math.max(sum[pos], tmpSum);	//주사위로 나온 숫자의 최대 합
+    			System.out.println("i -> " + i + ", pos -> " + pos + ",maxSum ======================> " + sum[pos] );
         	}
-        	System.out.println(Arrays.toString(A));
-        	System.out.println("i => " + i + ", masSum -> " + maxSum);
-        	A[i] = maxSum;
-        	System.out.println(Arrays.toString(A));
+        	System.out.println("[after ] sum -> " + Arrays.toString(sum));
+        	//System.out.println("i => " + i + ", maxSum -> " + maxSum);
         }
         
-		return A[length - 1];
+		return sum[length - 1];
 	}
 }
