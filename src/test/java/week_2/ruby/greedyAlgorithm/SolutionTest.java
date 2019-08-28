@@ -10,8 +10,8 @@ public class SolutionTest {
 	@Test
 	public void 테스트2() {
 		assertEquals(solution.solution(
-				new int[] {1,2}, 
-				new int[] {2,3}
-				), 0);
+				new int[] {1,3,7,9,9}, 
+				new int[] {5,6,8,9,10}
+				), 3);
 	}
 }

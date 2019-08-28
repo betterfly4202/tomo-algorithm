@@ -1,5 +1,7 @@
 package week_2.ruby.greedyAlgorithm;
 
+import java.util.Arrays;
+
 /**
  * https://app.codility.com/programmers/lessons/16-greedy_algorithms/max_nonoverlapping_segments/
  * 
@@ -40,8 +42,33 @@ N은 [0..30,000] 범위 내의 정수이며;
  * */
 public class Solution {
 	public int solution(int[] A, int[] B) {
-        // write your code in Java SE 8
-		
-		return 0;
+        int[][] map = new int[A.length + 1][B[B.length - 1] + 1];
+        int[] sum = new int[B[B.length - 1]];
+        
+        for( int i=0; i<A.length; i++ ) {
+        	for( int k=A[i]; k<=B[i]; k++) {
+        		map[i][k]++;
+        	}
+        	
+        	System.out.println("map[" + i + "] => " + Arrays.toString(map[i]));
+        }
+        
+        for( int i=1; i<=B[B.length - 1]; i++ ) {
+        	sum[i - 1] = map[0][i];
+        	for( int k=1; k<A.length; k++) {
+        		sum[i - 1] = sum[i - 1] + map[k][i];
+        	}
+        }
+        
+        System.out.println("& sum => " + Arrays.toString(sum));
+        
+        int count = 0;
+        for(int i=0; i<sum.length - 1; i++) {
+        	if( ( sum[i] == 1 || sum[i+1] == 1) && sum[i] != sum[i+1] ) {
+        		count++;
+        	}
+        }
+        
+		return count-1;
     }
 }
