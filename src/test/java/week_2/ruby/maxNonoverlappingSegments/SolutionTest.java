@@ -1,8 +1,10 @@
-package week_2.ruby.greedyAlgorithm;
+package week_2.ruby.maxNonoverlappingSegments;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import week_2.ruby.maxNonoverlappingSegments.Solution;
 
 public class SolutionTest {
 	private Solution solution = new Solution();
@@ -14,4 +16,5 @@ public class SolutionTest {
 				new int[] {5,6,8,9,10}
 				), 3);
 	}
+	
 }

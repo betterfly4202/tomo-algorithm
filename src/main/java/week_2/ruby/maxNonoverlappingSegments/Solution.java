@@ -1,4 +1,4 @@
-package week_2.ruby.greedyAlgorithm;
+package week_2.ruby.maxNonoverlappingSegments;
 
 import java.util.Arrays;
 
@@ -16,7 +16,7 @@ I ≠ J 인 두 개의 세그먼트 I 및 J는 하나 이상의 공통점을 공
 
     A [0] = 1 B [0] = 5
     A [1] = 3 B [1] = 6
-    A [2] = 7 B [2] = 8
+    A -[2] = 7 B [2] = 8
     A [3] = 9 B [3] = 9
     A [4] = 9 B [4] = 10
 세그먼트는 아래 그림에 표시되어 있습니다.
@@ -41,13 +41,79 @@ N은 [0..30,000] 범위 내의 정수이며;
 각 K에 대해 B [K] ≤ B [K + 1] (0 ≤ K <N-1).
  * */
 public class Solution {
+	
 	public int solution(int[] A, int[] B) {
+        int startPoint = 0;
+        int section = 0;
+		for(int i=0; i<A.length; i++) {
+    		if(startPoint < A[i]) {
+    			section ++;
+    			startPoint = B[i];
+    		}
+        }
+        
+        return section;
+	}
+	
+	public int solution3_xx(int[] A, int[] B) {
+        int[][] map = new int[A.length + 1][B[B.length - 1] + 1];
+        int[] temp = new int[B[B.length - 1] + 1];
+        int[] newTemp = new int[B[B.length - 1] + 1];
+        int depth = 1;
+        
+        for( int i=A[0]; i<=B[0]; i++) {
+    		map[0][i] = 1;
+    	}
+        
+        for( int i=1; i < A.length; i++) {
+        	boolean merge = true;
+        	
+        	for(int j=0; j<depth; j++) {
+        		temp = map[j];
+        		System.out.println("* tmp[" + j + "] => " + Arrays.toString(temp) + ", A|B =>" +A[i] +"," +  B[i]);
+            	
+        		Arrays.fill(newTemp, 0);
+        		merge = true;
+            	for( int k=A[i]; k<=B[i]; k++) {
+            		newTemp[k] = i+1;
+            		if( temp[k] > 0 ) {
+            			merge = false;
+            		} else {
+            			if( merge ) temp[k] = i+1;
+            		}
+            	}
+            	
+            	System.out.println("isMerge =>" + merge + ", arr => " + Arrays.toString(merge? temp:newTemp));
+        	}
+
+        	if( merge ) {
+    			map[i] = temp;
+    		} else {
+        		map[i] = newTemp;
+    			depth++;
+    			//System.out.println("update depth=>" + depth);
+        	}
+        	
+    		//System.out.println("depth => " + depth + "map[" + i + "] => " + Arrays.toString(map[i]));
+        }
+        
+        System.out.println();
+        System.out.println();
+        for( int i=0; i < A.length; i++) {
+        	System.out.println("* map[" + i + "] => " + Arrays.toString(map[i]));
+        }
+        
+		return depth;
+    }
+	
+	public int solution2_xx(int[] A, int[] B) {
         int[][] map = new int[A.length + 1][B[B.length - 1] + 1];
         int[] sum = new int[B[B.length - 1]];
+        int depth = 0;
         
         for( int i=0; i<A.length; i++ ) {
         	for( int k=A[i]; k<=B[i]; k++) {
-        		map[i][k]++;
+        		map[i][k] = i+1;
         	}
         	
         	System.out.println("map[" + i + "] => " + Arrays.toString(map[i]));
