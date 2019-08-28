@@ -1,4 +1,4 @@
-package week_1.judy;
+package week1;
 
 import java.util.HashMap;
 import java.util.Map;

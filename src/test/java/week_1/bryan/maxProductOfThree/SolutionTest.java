@@ -1,5 +1,3 @@
-package week_1.bryan.maxProductOfThree;
-
 import org.junit.Before;
 import org.junit.Test;
 
