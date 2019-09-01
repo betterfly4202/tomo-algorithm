@@ -6,7 +6,7 @@ package week_2.brad.numberSolitaire;
  */
 public class Solution {
 
-    public static int dynamicProgramming(int [] arr){
+    static int dynamicProgramming(int [] arr){
         int [] result = new int [6];
 
         for (int i = 1; i < arr.length; i++) {
@@ -17,10 +17,10 @@ public class Solution {
     }
 
     private static int getMaxValue(int [] tempArr){
-        int max = tempArr[0];
+        int maxVal= tempArr[0];
         for (int i = 1; i < tempArr.length; i++) {
-            max = Math.max(max, tempArr[i]);
+            maxVal = Math.max(maxVal, tempArr[i]);
         }
-        return max;
+        return maxVal;
     }
 }
