@@ -15,9 +15,7 @@ package week_3.brad.chocolatesByNumbers;
  */
 public class Solution {
     static int eatingCount(int N, int M){
-        int gcd = getGreatestCommonDivisor(N, M);
-
-        return N / gcd;
+        return N / getGreatestCommonDivisor(N, M);
     }
 
     private static int getGreatestCommonDivisor(int N, int M){

@@ -1,5 +1,7 @@
 package week_3.brad.brackets;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -11,24 +13,20 @@ public class SolutionStack {
         if(S.equals("")){
             return 1;
         }
-
+        Map<Character, Character> charMap = new HashMap<>();
+        charMap.put('(', ')');
+        charMap.put('[', ']');
+        charMap.put('{', '}');
         Stack<Character> stack = new Stack<>();
 
         for(char c : S.toCharArray()){
-            if(c == '{' || c == '[' || c == '('){
-                stack.push(c);
+            if (charMap.containsKey(c)) {
+                stack.push(charMap.get(c));
             }else{
-                if(stack.isEmpty()){
-                    return 0;
-                }
-                char temp = stack.pop();
-                if(c == '}' && temp != '{'){
-                    return 0;
-                }
-                if(c == ']' && temp != '['){
-                    return 0;
-                }
-                if(c == ')' && temp != '('){
+                if(!stack.isEmpty()
+                    && c ==stack.peek()) {
+                    stack.pop();
+                }else{
                     return 0;
                 }
             }
