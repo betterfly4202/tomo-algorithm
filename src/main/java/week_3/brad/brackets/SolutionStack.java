@@ -24,7 +24,7 @@ public class SolutionStack {
                 stack.push(charMap.get(c));
             }else{
                 if(!stack.isEmpty()
-                    && c ==stack.peek()) {
+                    && c == stack.peek()) {
                     stack.pop();
                 }else{
                     return 0;
