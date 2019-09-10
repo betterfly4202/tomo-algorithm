@@ -1,4 +1,5 @@
 package week_1.bryan.maxProductOfThree;
+
 import java.util.Arrays;
 
 public class Solution {
