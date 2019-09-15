@@ -1,13 +1,14 @@
 package week_4.brad.frogRiverOne;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by betterfly
  * Date : 2019.09.15
  * url : https://app.codility.com/programmers/lessons/4-counting_elements/frog_river_one/
  */
-public class Solution {
+public class SolutionMap {
     /*
     1. 1~X 까지 순차
         - 중복 숫자부터 제거
@@ -18,19 +19,28 @@ public class Solution {
         -> X : 10_000 인 경우 만번 루프를 돌아야함..최악
      */
     static int earliestTimeIndex(int X, int [] A){
-        HashSet<Integer> s = new HashSet<>();
-        for(int i=1; i<=X; i++){
-            s.add(i);
-        }
 
-        for(int i=0; i<A.length; i++){
-            s.remove(A[i]);
+        Map<Integer, Integer> m = valueHouse(A);
+        for (int i=1; i<=X; i++){
+            if(!m.containsKey(i)){
+                return -1;
+            }
 
-            if(s.isEmpty()){
-                return i;
+            if(i == X){
+                return m.get(i);
             }
         }
-
         return -1;
+    }
+
+    private static Map<Integer, Integer> valueHouse(int [] A){
+        HashMap<Integer, Integer> m = new HashMap<>();
+        for(int i=0; i<A.length; i++){
+            m.put(A[i], i);
+//            if(!m.containsKey(A[i])){
+//            }
+        }
+
+        return m;
     }
 }

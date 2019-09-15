@@ -20,6 +20,7 @@ public class SolutionTest {
     int [] sample3 = new int[]{1, 4, 3, 2, 6};
     int [] sample4 = new int[]{2, 4, 3, 2, 5};
     int [] sample5 = new int[]{1, 3, 1, 3, 2, 1, 3};
+    int [] sample6 = new int[]{4, 3, 2, 3, 2, 2, 1};
 
     /*
     assertThat(earliestTimeIndex(3, sample5), is(4));
@@ -33,5 +34,6 @@ public class SolutionTest {
         assertThat(earliestTimeIndex(5, sample3), is(-1));
         assertThat(earliestTimeIndex(5, sample4), is(-1));
         assertThat(earliestTimeIndex(3, sample5), is(4));
+        assertThat(earliestTimeIndex(4, sample6), is(6));
     }
 }
