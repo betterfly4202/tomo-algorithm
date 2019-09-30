@@ -13,8 +13,8 @@ import static week_4.brad.minMaxDivision.Solution.getArraySum;
  * Date : 2019.09.15
  */
 public class SolutionTest {
-    int [] sample = new int[]{2,1,5,1,2,2,2};
-    int [] sample2 = new int[]{2,4,1,1,3,3,2,3,2,5};
+    int [] sample = new int[]{2,1,5,1,2,2,2}; // <= 6.xxx
+    int [] sample2 = new int[]{2,4,1,1,3,3,2,3,2,5}; // <= 10.xx
     int [] sample3 = new int[]{1,1,3,3,3,4,7,7,4,4,5,5,5};
     int [] sample4 = new int[]{3,1,2,2,3,4,5,7,4,8,5,3,3,4,2};
     int [] sample5 = new int[]{0};
