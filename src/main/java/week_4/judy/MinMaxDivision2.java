@@ -1,7 +1,5 @@
 package week_4.judy;
 
-import java.util.Arrays;
-
 /**
  You are given integers K, M and a non-empty array A consisting of N integers. Every element of the array is not greater than M.
 
@@ -55,88 +53,73 @@ each element of array A is an integer within the range [0..M].
 source : https://app.codility.com/programmers/lessons/14-binary_search_algorithm/min_max_division/
  */
 
-public class MinMaxDivision {
+public class MinMaxDivision2 {
 
-	//0점으로 다시 풀어야함.
-	public int boards( int[] A, int k ) {
-		int premax=-1, max=-1;
-		int[] mid = getMidArr( A, k );
-		int[] div = new int[k];
-		div = sumDiv( div, A, mid );
-		max = getMax( div );
-		
-		while( true ) {
-			mid = move( div, mid );
-			div = sumDiv( div, A, mid );
-			max = getMax( div );
-			
-			if( premax != -1 && premax <= max ) {
-				return premax;
-			}
-			
-			premax = max;
-		}
+	public static void main(String[] args) {
+		MinMaxDivision2 s = new MinMaxDivision2();
+		System.out.println( s.solution(3,1,new int[] {1,1,1,0,0,1,1,1,1,1,0,0,0,0,0,1}) );
 	}
 
-	private int[] move(int[] div, int[] mid) {
-		for( int i=0; i<div.length-1; i++ ) {
-			if( div[i] == div[i+1] )
-				continue;
-			
-			if( div[i] > div[i+1] ) {
-				mid[i]++;
+	// param  : 
+	//     K = block의 갯수
+	//     M = A배열안의 Integer의 최댓값
+	//     A = 배열
+	// return : board의 크기 (k개의 board로 구멍을 가릴 수 있는 최소 크기)
+	
+	public int solution(int K, int M, int[] A) { 
+		int beg = max(A); //결과값 범위의 최소값 
+		int end = sum(A); //결과값 범위의 최댓값 
+		int result = -1;
+		int mid=-1;
+
+		while( beg <= end ) {
+			mid = (beg+end)/2; 
+
+			if( getBlockCount(A,mid) <= K ) { 
+				end = mid - 1;
+				result = mid;
 			}else {
-				mid[i]--;
+				beg = mid + 1;
 			}
-			//System.out.print(" mid["+i+"]="+div[i]);
 		}
-		//System.out.println();
-		return mid;
+		return result;
 	}
-
-	private int getMax(int[] div) {
-		Arrays.sort( div );
-		return div[div.length-1];
-	}
-
-	private int[] sumDiv(int[] div, int[] a, int[] mid) {
-		int begin, end;
-		for( int i=0; i<div.length; i++ ) {
-			if( i==0 )
-				begin = 0;
-			else 
-				begin = mid[i-1]+1;
-			
-			if( i==div.length-1 )
-				end = a.length-1;
-			else
-				end = mid[i];
-			
-			div[i] = sum( a, begin, end );
-			//System.out.print(" div["+i+"]="+div[i]);
+	
+	private int max(int[] A) {
+		int max = -1;
+		for( int num : A ) {
+			if( num > max )
+				max = num;
 		}
-		//System.out.println();
-		return div;
+		return max;
 	}
 
-	private int[] getMidArr(int[] a, int k) {
-		int gap = a.length/k;
-		int[] arr = new int[k-1];
-		
-		for( int i=0; i<arr.length; i++ ) {
-			arr[i] = (i+1)*gap;
-			//System.out.print(" mid["+i+"]="+arr[i]);
-		}
-		//System.out.println();
-		return arr;
-	}
-
-	private int sum(int[] a, int start, int end) {
-		int sum=0;
-		for( int i=start; i<=end; i++ ) {
-			sum += a[i];
+	private int sum(int[] a) {
+		int sum = 0;
+		for( int num : a ) {
+			sum += num;
 		}
 		return sum;
 	}
 
+	private int getBlockCount(int[] A, int sum_min) {
+		int n= A.length;
+		int block_count = 0;
+		int last_sum = 0;
+		
+		for( int i=0; i<n; i++ ) {
+			if( last_sum + A[i] > sum_min ) {
+				last_sum = 0;
+				block_count++;
+			}
+			
+			last_sum += A[i];
+			
+			if( i==n-1 )
+				block_count ++;
+
+		}
+		return block_count;
+	}
+	
 }
