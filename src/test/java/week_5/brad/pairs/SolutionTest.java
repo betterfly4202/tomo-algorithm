@@ -17,7 +17,7 @@ public class SolutionTest {
 
     @Test
     public void 검증(){
-//        assertThat(pairsResult(sample, 2), is(3));
+        assertThat(pairsResult(sample, 2), is(3));
         assertThat(pairsResult(sample2, 1), is(0));
     }
 }
