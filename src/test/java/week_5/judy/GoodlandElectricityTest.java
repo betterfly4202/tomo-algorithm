@@ -11,7 +11,7 @@ import org.junit.Test;
 public class GoodlandElectricityTest {
 
     @Test
-    public void k만큼_떨어져있는_숫자쌍_개수(){
+    public void 최소갯수로_전기를_공급할수있는_공장수(){
     	assertThat(GoodlandElectricity.pylons( 2 , new int[] {0,1,1,1,1,0} ), is(2));
     	assertThat(GoodlandElectricity.pylons( 2 , new int[] {0,1,0,0,0,1,0} ), is(-1));
     	assertThat(GoodlandElectricity.pylons( 3 , new int[] {0,1,0,0,0,1,1,1,1,1} ), is(3));

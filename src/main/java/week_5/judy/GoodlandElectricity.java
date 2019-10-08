@@ -53,16 +53,13 @@ public class GoodlandElectricity {
     public static int pylons(int k, int[] arr) {
     	int count = 0;
     	int end_of_electron = -1;
-    	int city=k-1;
+    	
+    	int city = getNextPlant(-1, arr, k);
+    	
+    	if( city == -1 )
+    		return -1;
     	
     	while( city < arr.length ) {
-    		if( end_of_electron == -1 && arr[city] == 0) {
-				if( --city < 0 )
-					return -1;
-				
-				continue;
-    		}
-    		
 			end_of_electron = city+k-1;
 			count++;
 			
@@ -80,20 +77,17 @@ public class GoodlandElectricity {
     private static int getNextPlant(int cur_city, int[] arr, int k) {
     	int end_of_electron = cur_city+k-1;
     	
-    	for( int next_plaint=end_of_electron+k; next_plaint>end_of_electron ; next_plaint-- ) {
-    		if( next_plaint > arr.length-1 )
-    			next_plaint= arr.length-1;
+    	int next_plant = cur_city >= 0 ? end_of_electron+k : cur_city+k;
+    	
+    	for( ; next_plant>cur_city ; next_plant-- ) {
+    		if( next_plant > arr.length-1 )
+    			next_plant= arr.length-1;
     		
-    		if( arr[next_plaint] == 1 ) {
-    			return next_plaint;
+    		if( arr[next_plant] == 1 ) {
+    			return next_plant;
     		}
     	}
     	
-		for( int next_plaint=end_of_electron; next_plaint>cur_city; next_plaint-- ) {
-			if( arr[next_plaint] == 1 ) {
-				return next_plaint;
-			}
-		}
 		return -1;
 	}
 
