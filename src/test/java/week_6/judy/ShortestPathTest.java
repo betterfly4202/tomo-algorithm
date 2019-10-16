@@ -13,6 +13,7 @@ public class ShortestPathTest {
     	//quiz.printShortestPath(7,0,3,4,3);
     	//ShortestPath.printShortestPath(150,24,15,46,102); //왜 오답인지 이해가 안감!!! 아.. 우선순위가 있었음.
     	//ShortestPath.printShortestPath(100,2,24,92,45); //왜 오답인지 이해가 안감!!!
-    	ShortestPath.printShortestPath(70,7,15,67,3);
+    	//ShortestPath.printShortestPath(70,7,15,67,3);
+    	ShortestPath.printShortestPath(10,9,9,5,3);
     }
 }
