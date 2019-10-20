@@ -1,6 +1,7 @@
 package week_6.bard.topView;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -9,8 +10,16 @@ import java.util.Scanner;
  * Date : 2019.10.02
  */
 public class Solution {
-    static Map<Integer, Integer> nodeMap = new HashMap<>();
-    private static int defaultPoint = 500;
+
+    /**
+     *  1 14 3 7 4 5 15 6 13 10 11 2 12 8 9
+     *  -> 2  1  14  15  12
+     */
+
+    static Map<Integer, Integer> nodeMap = new LinkedHashMap<>();
+    static int beforeNodePoint = 0;
+
+    private static int defaultPoint = 0;
 
     static void topView(Node root){
         nodeMap.put(defaultPoint, root.data);
@@ -18,7 +27,7 @@ public class Solution {
         setNodeMapProcedure(root);
 
         nodeMap.forEach((k, v) -> {
-            System.out.print(k + " ");
+            System.out.print(v+ " ");
         });
 
     }
@@ -33,10 +42,11 @@ public class Solution {
             }
 
             setNodeMapProcedure(root.left);
+        }else{
+            defaultPoint ++;
         }
 
         if(root.right != null){
-            defaultPoint ++;
             if (!nodeMap.containsKey(defaultPoint)){
                 nodeMap.put(defaultPoint, root.right.data);
             }

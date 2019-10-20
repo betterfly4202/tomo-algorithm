@@ -19,6 +19,7 @@ public class SolutionTest {
     // 1 2 5 3 6 4 ->  1 2 5 6
     @Test
     public void 검증() throws IOException {
-        String testJson = new String(Files.readAllBytes(Paths.get(getClass().getResource("/brad_topView.json").toString())));
+        String testJson =
+                new String(Files.readAllBytes(Paths.get(getClass().getResource("/brad_topView.json").toString())));
     }
 }
