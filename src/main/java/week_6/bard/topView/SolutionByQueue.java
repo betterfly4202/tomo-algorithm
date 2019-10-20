@@ -26,11 +26,6 @@ public class SolutionByQueue {
 
     private static void topView(Node root){
         queue.add(new nodeQueue(root, 0));
-        process();
-        print();
-    }
-
-    private static void process(){
         while(!queue.isEmpty()){
             nodeQueue q = queue.poll();
             if(!map.containsKey(q.position)){
@@ -44,8 +39,9 @@ public class SolutionByQueue {
                 addQueue(q.node.right, q.position + 1);
             }
         }
+        print();
     }
-    
+
     private static void addQueue(Node n, int position){
         queue.add(new nodeQueue(n, position));
     }
