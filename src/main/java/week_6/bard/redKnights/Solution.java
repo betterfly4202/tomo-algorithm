@@ -56,69 +56,134 @@ public class Solution {
         abstract int apply(int x, int y);
     }
 
-    static Map<Integer, String> pathMap = new LinkedHashMap<>();
+    static String result = "";
+    static int count=0;
 
-    static void printShortestPath(int n, int i_start, int j_start, int i_end, int j_end) {
-        if(!isPossible(i_start, i_end)){
-            String as="impossible";
+    static String printShortestPath(int n, int i_start, int j_start, int i_end, int j_end) {
+        if (!isPossible(i_start, i_end)){
+            return "impossible";
         }
 
-        process(i_start, j_start, i_end, j_end, 0);
-
-        System.out.println(pathMap);
+        /*
+            todo
+              - endCondition 재정의
+         */
+        if(process(i_start, j_start, i_end, j_end)){
+            return count + "\n" +result;
+        }else{
+            return "impossible";
+        }
     }
 
-    private static void process(int i_start, int j_start, int i_end, int j_end, int count) {
-        if(i_start > i_end && j_start > j_end){
-            i_start -= 1;
-            j_start -= 2;
-
-            pathMap.put(count++, "UL");
-
-            process(i_start, j_start, i_end, j_end, count);
+    private void endCondition(int i_start, int j_start, int i_end, int j_end){
+        if(i_start > i_end){
+            // j_start < 0 종료
         }
 
-        if(i_start > i_end && j_start < j_end){
-            i_start += 1;
-            j_start -= 2;
-
-            pathMap.put(count++, "UR");
-            process(i_start, j_start, i_end, j_end, count);
+        if(i_start < i_end){
+            // i_start > i_end 종료
         }
 
-        if(i_start == i_end && j_start < j_end){
-            i_start += 2;
-
-            pathMap.put(count++, "R");
-            process(i_start, j_start, i_end, j_end, count);
+        if(j_start > j_end){
+            // j_start < 0 종료
         }
 
-        if(i_start < i_end && j_start < j_end){
-            i_start += 1;
-            j_start += 2;
+        if(j_start < j_end){
+            // j_start > j_end 종료
+        }
+    }
 
-            pathMap.put(count++, "LR");
-            process(i_start, j_start, i_end, j_end, count);
+    private static boolean process(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start < 0 || j_start < 0){
+            result = "impossible";
+            return false;
         }
 
-        if(i_start > i_end && j_start < j_end){
-            i_start -= 1;
-            j_start += 2;
-
-            pathMap.put(count++, "LL");
-            process(i_start, j_start, i_end, j_end, count);
+        if(i_start == i_end && j_start == j_end){
+            return true;
         }
 
-        if(i_start == i_end && j_start > j_end){
+        moveUpperLeft(i_start, j_start, i_end, j_end);
+        moveUpperRight(i_start, j_start, i_end, j_end);
+        moveRight(i_start, j_start, i_end, j_end);
+        moveLowerRight(i_start, j_start, i_end, j_end);
+        moveLowerLeft(i_start, j_start, i_end, j_end);
+        moveLeft(i_start, j_start, i_end, j_end);
+
+        return true;
+    }
+
+    private static void moveUpperLeft(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start > i_end && j_start >= j_end){
             i_start -= 2;
+            j_start -= 1;
 
-            pathMap.put(count++, "L");
-            process(i_start, j_start, i_end, j_end, count);
+            count++;
+            result += "UL ";
+
+            process(i_start, j_start, i_end, j_end);
         }
     }
+
+    private static void moveUpperRight(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start > i_end && j_start <= j_end){
+            i_start += 2;
+            j_start -= 1;
+
+
+            count++;
+            result += "UR ";
+            process(i_start, j_start, i_end, j_end);
+        }
+    }
+
+    private static void moveRight(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start == i_end && j_start < j_end){
+            j_start += 2;
+
+            count++;
+            result += "R ";
+            process(i_start, j_start, i_end, j_end);
+        }
+    }
+
+    private static void moveLowerRight(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start < i_end && j_start <= j_end){
+            i_start += 2;
+            j_start += 1;
+
+            count++;
+            result += "LR ";
+            process(i_start, j_start, i_end, j_end);
+        }
+    }
+
+    private static void moveLowerLeft(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start < i_end && j_start >= j_end){
+            i_start += 2;
+            j_start -= 1;
+
+            count++;
+            result += "LL ";
+
+            process(i_start, j_start, i_end, j_end);
+        }
+    }
+
+    private static void moveLeft(int i_start, int j_start, int i_end, int j_end) {
+        if(i_start == i_end && j_start > j_end){
+            j_start -= 2;
+
+            count++;
+            result += "L ";
+
+            process(i_start, j_start, i_end, j_end);
+        }
+    }
+
 
     private static boolean isPossible(int i_start, int i_end){
-        return (i_start - i_end)/2 == 0;
+        return (i_start + i_end) % 2 == 0;
     }
 
     private static final Scanner scanner = new Scanner(System.in);

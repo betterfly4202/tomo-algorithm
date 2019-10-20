@@ -13,7 +13,9 @@ public class SolutionTest {
 
     @Test
     public void 검증(){
-        printShortestPath(6, 5, 1, 0, 5);
+//        System.out.println(printShortestPath(6, 6, 6, 0, 1));
+//        System.out.println(printShortestPath(6, 5, 1, 0, 5));
+        System.out.println(printShortestPath(6, 0, 3, 4, 3));
 
     }
 
