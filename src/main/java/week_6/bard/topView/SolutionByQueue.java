@@ -1,58 +1,55 @@
 package week_6.bard.topView;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by betterfly
  * Date : 2019.10.02
  */
-public class Solution {
-
+public class SolutionByQueue {
     /**
      *  1 14 3 7 4 5 15 6 13 10 11 2 12 8 9
      *  -> 2  1  14  15  12
      */
+    static class nodeQueue{
+        Node node;
+        int position;
 
-    static Map<Integer, Integer> nodeMap = new LinkedHashMap<>();
-    static int beforeNodePoint = 0;
-
-    private static int defaultPoint = 0;
-
-    static void topView(Node root){
-        nodeMap.put(defaultPoint, root.data);
-
-        setNodeMapProcedure(root);
-
-        nodeMap.forEach((k, v) -> {
-            System.out.print(v+ " ");
-        });
-
+        public nodeQueue(Node node, int position){
+            this.node = node;
+            this.position = position;
+        }
     }
 
-    private static void setNodeMapProcedure(Node root){
-        System.out.println("Root :" + root.data + " point : " + defaultPoint);
+    private static Queue<nodeQueue> queue = new LinkedList<>();
+    private static TreeMap<Integer, Integer> map = new TreeMap<>();
 
-        if(root.left != null){
-            defaultPoint --;
-            if (!nodeMap.containsKey(defaultPoint)){
-                nodeMap.put(defaultPoint, root.left.data);
+    private static void topView(Node root){
+        queue.add(new nodeQueue(root, 0));
+        while(!queue.isEmpty()){
+            nodeQueue q = queue.poll();
+            if(!map.containsKey(q.position)){
+                map.put(q.position, q.node.data);
             }
 
-            setNodeMapProcedure(root.left);
-        }else{
-            defaultPoint ++;
-        }
-
-        if(root.right != null){
-            if (!nodeMap.containsKey(defaultPoint)){
-                nodeMap.put(defaultPoint, root.right.data);
+            if(q.node.left != null){
+                addQueue(q.node.left, q.position - 1);
             }
-
-            setNodeMapProcedure(root.right);
+            if(q.node.right != null){
+                addQueue(q.node.right, q.position + 1);
+            }
         }
+        print();
+    }
+
+    private static void addQueue(Node n, int position){
+        queue.add(new nodeQueue(n, position));
+    }
+
+    private static void print(){
+        map.values().forEach(v ->{
+            System.out.print(v + " ");
+        });
     }
 
     static class Node{
