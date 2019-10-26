@@ -1,17 +1,68 @@
 package week_7.bard.dfs;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * Created by betterfly
  * Date : 2019.10.25
  */
-public class DepthFirstSearch {
+public class DepthFirstSearch<T> {
+    static class Queue<T>{
+        class Node<T>{
+            private T data;
+            private Node<T> next;
+
+            public Node(T data){
+                this.data = data;
+            }
+        }
+
+        private Node<T> first;
+        private Node<T> last;
+
+        public void add (T item){
+            Node<T >t = new Node<>(item);
+
+            if(last != null){
+                last.next = t;
+            }
+            last = t;
+
+            if(first == null){
+                first = last;
+            }
+        }
+
+        public T remove(){
+            if(first == null){
+                throw new NoSuchElementException();
+            }
+
+            T data = first.data;
+            first = first.next;
+
+            if(first == null){
+                last = null;
+            }
+
+            return data;
+        }
+
+        public T peek(){
+            if(first == null){
+                throw new NoSuchElementException();
+            }
+
+            return first.data;
+        }
+
+        public boolean isEmpty(){
+            return first == null;
+        }
+    }
     static class Graph{
         static class Node{
             int data;
@@ -75,16 +126,16 @@ public class DepthFirstSearch {
 
         void bfs(int idx){
             Node root = nodes[idx];
-            Queue<Node> queue = new PriorityQueue<>();
-            queue.offer(root);
+            java.util.Queue<Node> queue = new LinkedList<Node>();
+            queue.add(root);
             root.marked = true;
 
             while(!queue.isEmpty()){
-                Node r = queue.peek();
+                Node r = queue.poll();
                 for(Node n : r.adjacent){
                     if(n.marked == false){
                         n.marked = true;
-                        queue.offer(n);
+                        queue.add(n);
                     }
                 }
 
@@ -134,9 +185,9 @@ public class DepthFirstSearch {
         g.addEdge(5 ,7);
         g.addEdge(6 ,8);
 
-        g.dfs();
+//        g.dfs();
         g.bfs();
-        g.dfsR(3);
+//        g.dfsR(3);
 
     }
 }
