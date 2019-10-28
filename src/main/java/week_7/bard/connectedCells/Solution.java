@@ -11,28 +11,27 @@ import java.util.Scanner;
  */
 public class Solution {
     static int connectedCell(int[][] matrix) {
-
-        int maxRegion = 0;
+        int maxSize = 0;
 
         for(int row = 0; row < matrix.length; row++){
             for(int column = 0 ; column < matrix[row].length; column++){
-                maxRegion = getMaxRegionSize(matrix, maxRegion, row, column);
+                maxSize = getMaxSize(matrix, maxSize, row, column);
             }
         }
 
-        return maxRegion;
+        return maxSize;
     }
 
-    private static int getMaxRegionSize(int[][] matrix, int maxRegion, int row, int column) {
+    private static int getMaxSize(int[][] matrix, int maxSize, int row, int column) {
         if(matrix[row][column] != 1){
-            return maxRegion;
+            return maxSize;
         }
 
-        return Math.max(getRegionSize(matrix, row, column), maxRegion);
+        return Math.max(getRegionSize(matrix, row, column), maxSize);
     }
 
     private static int getRegionSize(int[][] matrix, int row, int column) {
-        if (validationRegion(matrix, row, column)){
+        if (!validationRegion(matrix, row, column)){
             return 0;
         }
 
@@ -50,14 +49,20 @@ public class Solution {
     }
 
     private static boolean validationRegion(int[][] matrix, int row, int column) {
-        if(row < 0 || column < 0 || row >= matrix.length || column >= matrix[row].length){
-            return true;
+        // row-1, col -1 < 0
+        if(row < 0 || column < 0){
+            return false;
+        }
+
+        if( row >= matrix.length || column >= matrix[row].length){
+            return false;
         }
 
         if(matrix[row][column] == 0){
-            return true;
+            return false;
         }
-        return false;
+
+        return true;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
