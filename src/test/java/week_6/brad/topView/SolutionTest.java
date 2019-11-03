@@ -1,4 +1,4 @@
-package week_6.bard.topView;
+package week_6.brad.topView;
 
 import org.junit.Test;
 
@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-import static week_6.bard.topView.Solution.topView;
 
 /**
  * Created by betterfly

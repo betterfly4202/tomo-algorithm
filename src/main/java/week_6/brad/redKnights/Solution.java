@@ -1,7 +1,5 @@
-package week_6.bard.redKnights;
+package week_6.brad.redKnights;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**

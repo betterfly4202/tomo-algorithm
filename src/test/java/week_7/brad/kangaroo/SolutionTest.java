@@ -1,11 +1,11 @@
-package week_7.bard.kangaroo;
+package week_7.brad.kangaroo;
 
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-import static week_7.bard.kangaroo.Solution.kangaroo;
-import static week_7.bard.kangaroo.Solution.lcm;
+import static week_7.brad.kangaroo.Solution.kangaroo;
+import static week_7.brad.kangaroo.Solution.lcm;
 
 /**
  * Created by betterfly

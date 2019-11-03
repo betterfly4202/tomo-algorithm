@@ -1,7 +1,5 @@
-package week_7.bard.connectedCells;
+package week_7.brad.connectedCells;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 

@@ -1,8 +1,7 @@
-package week_7.bard.dfs;
+package week_7.brad.dfs;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 import java.util.Stack;
 
 /**

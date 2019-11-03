@@ -1,4 +1,4 @@
-package week_7.bard.kangaroo;
+package week_7.brad.kangaroo;
 
 /**
  * Created by betterfly
