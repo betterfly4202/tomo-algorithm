@@ -14,6 +14,9 @@ public class SolutionTest {
 
     @Test
     public void 값찾기(){
+        assertThat(Solution.biggerIsGreater("mhtvaqofxtyrz"), is("mhtvaqofxtyzr"));
+        assertThat(Solution.biggerIsGreater("dkhc"), is("hcdk"));
+
         assertThat(Solution.biggerIsGreater("abdc"), is("acbd"));
         assertThat(Solution.biggerIsGreater("fedcbabcd"), is("fedcbabdc"));
         assertThat(Solution.biggerIsGreater("lmno"), is("lmon"));
@@ -23,19 +26,16 @@ public class SolutionTest {
         assertThat(Solution.biggerIsGreater("hefg"), is("hegf"));
         assertThat(Solution.biggerIsGreater("dhck"), is("dhkc"));
 
-        assertThat(Solution.biggerIsGreater("ehdegnmorgafrjxvksc"), is("ehdegnmorgafrjxvsck"));
-
         assertThat(Solution.biggerIsGreater("zyyyvvvvvuttsrqqokjjheedccb"), is("no answer"));
         assertThat(Solution.biggerIsGreater("imllmmcslslkyoegymoa"), is("imllmmcslslkyoegyoam"));
         assertThat(Solution.biggerIsGreater("fvincndjrurfh"), is("fvincndjrurhf"));
         assertThat(Solution.biggerIsGreater("rtglgzzqxnuflitnlyit"), is("rtglgzzqxnuflitnlyti"));
-        assertThat(Solution.biggerIsGreater("mhtvaqofxtyrz"), is("mhtvaqofxtyzr"));
+
         assertThat(Solution.biggerIsGreater("zalqxykemvzzgaka"), is("zalqxykemvzzgkaa"));
         assertThat(Solution.biggerIsGreater("wjjulziszbqqdcpdnhdo"), is("wjjulziszbqqdcpdnhod"));
         assertThat(Solution.biggerIsGreater("japjbvjlxzkgietkm"), is("japjbvjlxzkgietmk"));
         assertThat(Solution.biggerIsGreater("jqczvgqywydkunmjw"), is("jqczvgqywydkunmwj"));
-
-
+        assertThat(Solution.biggerIsGreater("ehdegnmorgafrjxvksc"), is("ehdegnmorgafrjxvsck"));
     }
 
 
@@ -61,5 +61,5 @@ public class SolutionTest {
         assertThat(FirstSolution.biggerIsGreater("jqczvgqywydkunmjw"), is("jqczvgqywydkunmwj"));
 
 //        assertThat(FirstSolution.biggerIsGreater("ehdegnmorgafrjxvksc"), is("ehdegnmorgafrjxvsck"));
-    } 
+    }
 }

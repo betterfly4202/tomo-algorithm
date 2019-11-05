@@ -2,6 +2,8 @@ package week_8.brad.biggerIsGreater;
 /**
  * Created by betterfly
  * Date : 2019.11.03
+ *
+ * a b c d e f g h i j k
  */
 public class Solution {
     static String biggerIsGreater(String w) {
@@ -22,17 +24,19 @@ public class Solution {
                */
 
                // postChar ~ 전체 문자열 사이 가장 작은 값 찾기
-               char tmp = 'z';
+               char tmp = '}';
                int compareIdx = postCharIdx;
                for(int i=idx; i<w.length(); i++){
-                   if(tmp > w.charAt(i)){
+                   if(tmp > w.charAt(i) && postChar < w.charAt(i)){
                        tmp = w.charAt(i);
                        compareIdx = i;
                    }
                }
 
                // 변경 후 모든 문자열 ascending sorting..
-               String stdValue = swappingCharacter(w, postCharIdx, compareIdx);
+               String stdValue = postChar < tmp ?
+                       swappingCharacter(w, postCharIdx, compareIdx) :
+                       swappingCharacter(w, postCharIdx, idx);
 
                char [] sortingTargetCharArr = orderingAscendingCharacter(stdValue, idx);
                sort(sortingTargetCharArr, 0, w.length()-1 - idx);
