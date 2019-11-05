@@ -1,6 +1,5 @@
-package week_6.bard.topView;
+package week_6.brad.topView;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
