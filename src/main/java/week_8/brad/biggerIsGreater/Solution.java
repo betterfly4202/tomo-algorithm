@@ -38,9 +38,9 @@ public class Solution {
                        swappingCharacter(w, postCharIdx, compareIdx) :
                        swappingCharacter(w, postCharIdx, idx);
 
-               char [] sortingTargetCharArr = orderingAscendingCharacter(stdValue, idx);
-               sort(sortingTargetCharArr, 0, w.length()-1 - idx);
-               return combinedResult(stdValue, sortingTargetCharArr, idx);
+               char [] charArr = getOrderingCharArray(stdValue, idx);
+               orderingAscendingCharacter(charArr, 0, w.length()-1 - idx);
+               return combinedResult(stdValue, charArr, idx);
            }
 
             idx--;
@@ -73,7 +73,7 @@ public class Solution {
     }
 
     // 뒤에서부터 검증해서 앞으로 밀면됨.
-    private static char[] orderingAscendingCharacter(String w, int startIdx){
+    private static char[] getOrderingCharArray(String w, int startIdx){
         char [] sortedCharArr = new char[w.length() - startIdx];
         int idx = 0;
         for(int i=startIdx; i<w.length(); i++){
@@ -84,15 +84,15 @@ public class Solution {
         return sortedCharArr;
     }
 
-    private static void sort(char[] arr, int start, int end){
+    private static void orderingAscendingCharacter(char[] arr, int start, int end){
         int right = partition(arr, start, end);
 
         if(start < right - 1){
-            sort(arr, start, right- 1);
+            orderingAscendingCharacter(arr, start, right- 1);
         }
 
         if(right < end){
-            sort(arr, right, end);
+            orderingAscendingCharacter(arr, right, end);
         }
     }
 
