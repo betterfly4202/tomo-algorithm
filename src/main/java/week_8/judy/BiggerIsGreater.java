@@ -7,6 +7,57 @@ import java.util.Scanner;
 
 public class BiggerIsGreater {
     // Complete the biggerIsGreater function below.
+    static String biggerIsGreater(String w) {
+ 
+        int[] arr = new int[w.length()];
+ 
+        for(int i=0; i<w.length(); i++){
+            arr[i] = w.charAt(i);
+        }
+        String rs = "";
+        if(nextPermutation(arr)){
+            for(int n : arr){
+                rs += (char)n;
+            }
+            return rs;
+        } else {
+            return "no answer";
+        }
+    }
+ 
+    static boolean nextPermutation(int[] array) {
+        
+        int i = array.length - 1;
+        while (i > 0 && array[i - 1] >= array[i]) {
+            i--;
+        }
+       
+        if (i <= 0) {
+            return false;
+        }
+        
+        int j = array.length - 1;
+        while (array[j] <= array[i - 1]) {
+            j--;
+        }
+ 
+        int temp = array[i - 1];
+        array[i - 1] = array[j];
+        array[j] = temp;
+        
+        j = array.length - 1;
+        while (i < j) {
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            i++;
+            j--;
+        }
+        
+        return true;
+    }
+	/*
+    // Complete the biggerIsGreater function below.
     public static String biggerIsGreater(String w) {
     	char[] words = w.toCharArray();
     	for( int i=0; i<words.length-1; i++ ) {
@@ -46,7 +97,7 @@ public class BiggerIsGreater {
     	}
     	return sorted;
 	}
-
+*/
 	private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
